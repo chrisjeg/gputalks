@@ -147,7 +147,7 @@ int main(void)
     // Initiate variables
     double pi;
     int it;
-    int N = 1048576;
+    long int N = 1048576;
     pi=0.0;
 
     for(int i=0; i<10024;i++){
@@ -155,12 +155,12 @@ int main(void)
         pi += gpu_calc_pi_monte_carlo(N);
         it = i+1;
         if (i%50==1){
-            printf("Samples : %d, ", (N*it));
+            printf("Samples/1 mill : %d, ",it);
             printf("Pi Estimated : %f, ", pi/it);
             printf("Error : %f\n", (PI-(pi/it))/PI);
         } 
         if(i==100)cudaProfilerStop();
     }
-    pi /= 1024;
+    pi /= 10024;
     printf("Pi is estimated to be %f\n", pi);
 }
